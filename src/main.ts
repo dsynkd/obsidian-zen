@@ -63,8 +63,10 @@ export default class Zen extends Plugin {
 	async saveSettings() {
 		await this.saveData(this.settings);
 
-		this.zenView.removeGlobalClasses();
-		this.zenView.addGlobalClasses();
+		if(this.zenView) {
+			this.zenView.removeGlobalClasses();
+			this.zenView.addGlobalClasses();
+		}
 
 		if (this.settings.enabled) {
 			this.zenView.removeBodyClasses();
