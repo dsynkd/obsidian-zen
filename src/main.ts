@@ -19,6 +19,9 @@ export default class Zen extends Plugin {
 
 		await this.loadSettings();
 
+		this.integrator = new Integrator(this.app, this);
+		this.integrator.load(pluginIntegrations);
+
 		this.addSettingTab(new SettingsTab(this.app, this));
 
 		this.registerView(VIEW_TYPE_ZEN, (leaf: ZenLeaf) => {
@@ -35,8 +38,6 @@ export default class Zen extends Plugin {
 			}
 		});
 
-		this.integrator = new Integrator(this.app, this);
-		this.integrator.load(pluginIntegrations);
 		this.app.workspace.onLayoutReady(async () => {
 			await this.initLeaf();
 		});
